@@ -1,5 +1,4 @@
-trigger:
-- '*'
+trigger: none
 
 variables:
   buildConfiguration: 'Release'
@@ -152,8 +151,9 @@ stages:
         sudo apt-get update
         sudo apt-get install xsltproc
         xsltproc JMeter2JUnit.xsl Results.xml > JUnit.xml
+        xsltproc JMeter2JUnit.xsl Results.xml > JUnit2.xml
       displayName: 'Transform JMeter output to JUnit'
     - task: PublishTestResults@2
       inputs:
         testResultsFormat: JUnit
-        testResultsFiles: JUnit.xml
+        testResultsFiles: JUnit*.xml
